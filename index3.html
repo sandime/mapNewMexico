@@ -39,6 +39,19 @@
            // creating the map with the dom element
             //mapElement is the div element mapOptions is holds starting params
             map = new google.maps.Map(mapElement, mapOptions)
+            //mobile
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                            var lat = position.coords.latitude;
+                            var lng = position.coords.longitude;
+                            //Creating LatLng object with latitude and
+                            //longitude.
+                            var devCenter =  new google.maps.LatLng(lat, lng);
+                            map.setCenter(devCenter);
+                            map.setZoom(15);
+                        });
+            }
         }
         // listens to the doc load, triggers initMap function
         google.maps.event.addDomListener (window, 'load', initMap);
